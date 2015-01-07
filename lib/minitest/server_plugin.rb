@@ -19,7 +19,6 @@ end
 
 class Minitest::ServerReporter < Minitest::AbstractReporter
   def initialize pid
-    DRb.start_service
     uri = Minitest::Server.path(pid)
     @mt_server = DRbObject.new_with_uri uri
     super()
