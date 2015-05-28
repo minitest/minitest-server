@@ -1,3 +1,9 @@
+=== 1.0.2 / 2015-05-28
+
+* 1 minor enhancement:
+
+  * Sanitize failures before serializing if UnexpectedErrors have bad data.
+
 === 1.0.1 / 2015-01-09
 
 * 1 bug fix:
