@@ -44,7 +44,8 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
         # embedded exception might not be able to be marshaled.
         bt = e.exception.backtrace
 
-        ex = e.exception = RuntimeError.new e.message
+        ex = RuntimeError.new(e.message)
+        e.exception = ex
         ex.set_backtrace bt
 
         if ex.instance_variables.include? :@bindings then # web-console is Evil
