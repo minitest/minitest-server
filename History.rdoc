@@ -1,3 +1,9 @@
+=== 1.0.3 / 2015-07-25
+
+* 1 bug fix:
+
+  * Minor tweak to get valid parse on 1.8.
+
 === 1.0.2 / 2015-05-28
 
 * 1 minor enhancement:
