@@ -44,7 +44,7 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
         # embedded exception might not be able to be marshaled.
         bt = e.exception.backtrace
 
-        ex = RuntimeError.new(e.message)
+        ex = RuntimeError.new(e.exception.message)
         e.exception = ex
         ex.set_backtrace bt
 
@@ -52,6 +52,10 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
           ex.instance_variable_set :@bindings, nil
           e.instance_variable_set  :@bindings, nil
         end
+      when Minitest::Assertion then
+        bt = e.backtrace
+        e = e.class.new(e.message)
+        e.set_backtrace bt
       end
 
       e
