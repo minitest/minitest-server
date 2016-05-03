@@ -48,6 +48,8 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
         e.exception = ex
         ex.set_backtrace bt
 
+        e = Minitest::UnexpectedError.new ex # ugh. some rails plugin. ugh.
+
         if ex.instance_variables.include? :@bindings then # web-console is Evil
           ex.instance_variable_set :@bindings, nil
           e.instance_variable_set  :@bindings, nil
@@ -56,6 +58,10 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
         bt = e.backtrace
         e = e.class.new(e.message)
         e.set_backtrace bt
+      when Minitest::Skip then
+        # do nothing
+      else
+        warn "Unhandled exception type: #{e.class}\n\n#{e.inspect}"
       end
 
       e
