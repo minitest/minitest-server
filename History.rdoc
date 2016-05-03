@@ -1,3 +1,10 @@
+=== 1.0.4 / 2016-05-02
+
+* 2 bug fixes:
+
+  * Fixes a problem with rails or some evil gem messing up Exception marshalling.
+  * Sanitize assertion exceptions because web-console is EVIL.
+
 === 1.0.3 / 2015-07-25
 
 * 1 bug fix:
