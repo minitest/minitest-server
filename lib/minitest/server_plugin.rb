@@ -31,10 +31,18 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
   def record result
     r = result
     c = r.class
-    file, = c.instance_method(r.name).source_location
+
+    if defined?(Minitest::Result) && Minitest::Result === r then
+      file, = r.source_location
+      cn = r.klass
+    else
+      file, = r.method(r.name).source_location
+      cn = c.name
+    end
+
     sanitize r.failures
 
-    @mt_server.result file, c.name, r.name, r.failures, r.assertions, r.time
+    @mt_server.result file, cn, r.name, r.failures, r.assertions, r.time
   end
 
   def sanitize failures
