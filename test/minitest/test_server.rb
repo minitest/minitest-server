@@ -20,7 +20,7 @@ class BogoTests < Minitest::Test
   def error_test
     raise "error"
   rescue => e
-    e.instance_variable_set :@binding, binding
+    e.instance_variable_set :@binding, binding # TODO: what is this for?
     raise e
   end
 

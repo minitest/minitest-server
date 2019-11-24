@@ -50,10 +50,10 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
       case e
       when Minitest::UnexpectedError then
         # embedded exception might not be able to be marshaled.
-        bt = e.exception.backtrace
+        bt = e.error.backtrace
 
-        ex = RuntimeError.new(e.exception.message)
-        e.exception = ex
+        ex = RuntimeError.new(e.error.message)
+        e.error = ex
         ex.set_backtrace bt
 
         e = Minitest::UnexpectedError.new ex # ugh. some rails plugin. ugh.
@@ -62,12 +62,12 @@ class Minitest::ServerReporter < Minitest::AbstractReporter
           ex.instance_variable_set :@bindings, nil
           e.instance_variable_set  :@bindings, nil
         end
+      when Minitest::Skip then
+        # do nothing
       when Minitest::Assertion then
         bt = e.backtrace
         e = e.class.new(e.message)
         e.set_backtrace bt
-      when Minitest::Skip then
-        # do nothing
       else
         warn "Unhandled exception type: #{e.class}\n\n#{e.inspect}"
       end
