@@ -1,3 +1,9 @@
+=== 1.0.6 / 2019-12-14
+
+* 1 bug fix:
+
+  * Fixed handling of UnexpectedError for latest version of MT.
+
 === 1.0.5 / 2018-02-06
 
 * 1 minor enhancement:
