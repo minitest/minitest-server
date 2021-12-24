@@ -19,9 +19,13 @@ class BogoTests < Minitest::Test
 
   def error_test
     raise "error"
+  end
+
+  def unmarshalable_error_test
+    raise "error"
   rescue => e
-    e.instance_variable_set :@binding, binding # TODO: what is this for?
-    raise e
+    e.instance_variable_set :@binding, binding
+    raise
   end
 
   def wtf_test
@@ -85,8 +89,21 @@ class ServerTest < Minitest::Test
   end
 
   def test_error
-    msg = ["RuntimeError: error\n    #{__FILE__}:21:in `error_test'"]
-    assert_run "error", msg, 0
+    msg = <<~EOM.chomp
+      RuntimeError: error
+          #{__FILE__}:21:in `error_test'
+    EOM
+
+    assert_run "error", [msg], 0
+  end
+
+  def test_error_unmarshalable
+    msg = <<~EOM.chomp
+      RuntimeError: Wrapped undumpable exception for: RuntimeError: error
+          #{__FILE__}:25:in `unmarshalable_error_test'
+    EOM
+
+    assert_run "unmarshalable_error", [msg], 0
   end
 
   def test_wtf
