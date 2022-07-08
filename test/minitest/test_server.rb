@@ -21,8 +21,16 @@ class BogoTests < Minitest::Test
     raise "error"
   end
 
-  def unmarshalable_error_test
+  def unmarshalable_ivar_test
     raise "error"
+  rescue => e
+    e.instance_variable_set :@binding, binding
+    raise
+  end
+
+  def unmarshalable_class_test
+    exc = Class.new RuntimeError
+    raise exc, "error"
   rescue => e
     e.instance_variable_set :@binding, binding
     raise
@@ -97,13 +105,22 @@ class ServerTest < Minitest::Test
     assert_run "error", [msg], 0
   end
 
-  def test_error_unmarshalable
+  def test_error_unmarshalable__ivar
     msg = <<~EOM.chomp
-      RuntimeError: Wrapped undumpable exception for: RuntimeError: error
-          #{__FILE__}:25:in `unmarshalable_error_test'
+      RuntimeError: error
+          #{__FILE__}:25:in `unmarshalable_ivar_test'
     EOM
 
-    assert_run "unmarshalable_error", [msg], 0
+    assert_run "unmarshalable_ivar", [msg], 0
+  end
+
+  def test_error_unmarshalable__class
+    msg = <<~EOM.chomp
+      RuntimeError: Neutered Exception #<Class:0xXXXXXX>: error
+          #{__FILE__}:33:in `unmarshalable_class_test'
+    EOM
+
+    assert_run "unmarshalable_class", [msg], 0
   end
 
   def test_wtf
@@ -114,6 +131,8 @@ class ServerTest < Minitest::Test
     act = Server.run type
     act[-1] = 0 # time
     act[-3].map!(&:message)
+
+    act[-3][0].gsub!(/0x\h+/, "0xXXXXXX") if act[-3][0]
 
     exp = ["test/minitest/test_server.rb", "BogoTests", "#{type}_test", e, n, 0]
 

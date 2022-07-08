@@ -11,7 +11,7 @@ Hoe.spec "minitest-server" do
   developer "Ryan Davis", "ryand-ruby@zenspider.com"
   license "MIT"
 
-  dependency "minitest", "~> 5.0"
+  dependency "minitest", "~> 5.16"
 end
 
 # vim: syntax=ruby
