@@ -1,3 +1,9 @@
+=== 1.0.7 / 2022-12-17
+
+* 1 minor enhancement:
+
+  * Bumped to minitest ~> 5.16 to get improved marshal handling.
+
 === 1.0.6 / 2019-12-14
 
 * 1 bug fix:
@@ -40,4 +46,3 @@
 * 1 major enhancement
 
   * Birthday!
-
