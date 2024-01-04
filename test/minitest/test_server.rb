@@ -96,10 +96,12 @@ class ServerTest < Minitest::Test
     assert_run "fail", ["fail"], 1
   end
 
+  FILE = __FILE__.delete_prefix "#{Dir.pwd}/"
+
   def test_error
     msg = <<~EOM.chomp
       RuntimeError: error
-          #{__FILE__}:21:in `error_test'
+          #{FILE}:21:in `error_test'
     EOM
 
     assert_run "error", [msg], 0
@@ -108,7 +110,7 @@ class ServerTest < Minitest::Test
   def test_error_unmarshalable__ivar
     msg = <<~EOM.chomp
       RuntimeError: error
-          #{__FILE__}:25:in `unmarshalable_ivar_test'
+          #{FILE}:25:in `unmarshalable_ivar_test'
     EOM
 
     assert_run "unmarshalable_ivar", [msg], 0
@@ -117,7 +119,7 @@ class ServerTest < Minitest::Test
   def test_error_unmarshalable__class
     msg = <<~EOM.chomp
       RuntimeError: Neutered Exception #<Class:0xXXXXXX>: error
-          #{__FILE__}:33:in `unmarshalable_class_test'
+          #{FILE}:33:in `unmarshalable_class_test'
     EOM
 
     assert_run "unmarshalable_class", [msg], 0
