@@ -12,6 +12,7 @@ Hoe.spec "minitest-server" do
   license "MIT"
 
   dependency "minitest", "~> 5.16"
+  dependency "drb", "~> 2.0"
 end
 
 # vim: syntax=ruby
