@@ -3,7 +3,7 @@ require "tmpdir"
 require "minitest"
 
 class Minitest::Server
-  VERSION = "1.0.7"
+  VERSION = "1.0.8"
 
   TOPDIR = Dir.pwd + "/"
 

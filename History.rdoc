@@ -1,3 +1,9 @@
+=== 1.0.8 / 2024-02-26
+
+* 1 bug fix:
+
+  * Add drb as a dependency. (y-yagi)
+
 === 1.0.7 / 2022-12-17
 
 * 1 minor enhancement:
