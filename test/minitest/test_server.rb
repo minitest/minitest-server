@@ -134,7 +134,7 @@ class ServerTest < Minitest::Test
     act[-1] = 0 # time
     act[-3].map!(&:message)
 
-    act[-3][0].gsub!(/0x\h+/, "0xXXXXXX") if act[-3][0]
+    act[-3][0] = act[-3][0].gsub(/0x\h+/, "0xXXXXXX") if act[-3][0]
 
     exp = ["test/minitest/test_server.rb", "BogoTests", "#{type}_test", e, n, 0]
 
