@@ -130,6 +130,8 @@ class ServerTest < Minitest::Test
   end
 
   def assert_run type, e, n
+    e[0] = e[0].sub "`", "'BogoTests#" if RUBY_VERSION > "3.4" if e[0]
+
     act = Server.run type
     act[-1] = 0 # time
     act[-3].map!(&:message)
