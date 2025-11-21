@@ -11,7 +11,7 @@ Hoe.spec "minitest-server" do
   developer "Ryan Davis", "ryand-ruby@zenspider.com"
   license "MIT"
 
-  dependency "minitest", "~> 5.16"
+  dependency "minitest", "> 5.16"
   dependency "drb", "~> 2.0"
 end
 
