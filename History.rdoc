@@ -1,3 +1,9 @@
+=== 1.0.9 / 2025-11-20
+
+* 1 bug fix:
+
+  * Loosen dependency on minitest to work with MT6.
+
 === 1.0.8 / 2024-02-26
 
 * 1 bug fix:
