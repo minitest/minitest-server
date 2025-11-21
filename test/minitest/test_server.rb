@@ -55,9 +55,13 @@ end
 class Client
   def run pid, type
     reporter = TestServerReporter.new pid
-    reporter.start
 
-    reporter.record Minitest.run_one_method(BogoTests, "#{type}_test")
+    unless Minitest.respond_to? :run_one_method then # MT6
+      BogoTests.run BogoTests, "#{type}_test", reporter
+    else
+      reporter.start
+      reporter.record Minitest.run_one_method(BogoTests, "#{type}_test")
+    end
   end
 end
 
