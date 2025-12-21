@@ -22,7 +22,7 @@ for real-world examples.
 
 == REQUIREMENTS:
 
-* minitest 5+
+* minitest ~> 5.0 -- not needed for minitest 6+
 
 == INSTALL:
 
