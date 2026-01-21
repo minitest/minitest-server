@@ -2,6 +2,11 @@ require "drb"
 require "tmpdir"
 require "minitest"
 
+if Minitest.respond_to? :load # MT6+ and manual plugin loading
+  require_relative "server_plugin"
+  Minitest.register_plugin :server
+end
+
 class Minitest::Server
   VERSION = "1.0.9"
 
